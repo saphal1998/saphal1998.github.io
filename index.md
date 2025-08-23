@@ -8,6 +8,7 @@ permalink: /
 [Github](https://github.com/saphal1998) ·
 [Email](mailto:saphal1998@gmail.com) ·
 [Resume](https://drive.google.com/file/d/1bchcQUT6Yc5s6r8yqiI14ERXMaD-HcVR/view?usp=drive_link)
+[Blog](/blog/)
 
 # Hi, I'm **Saphal Patro.**
 

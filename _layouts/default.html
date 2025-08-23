@@ -1,103 +1,145 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>{{ page.title | default: site.title }}</title>
-    <style>
-      /* Center page and set a minimal typographic scale */
-      html, body { height: 100%; margin: 0; background: #fff; color: #000; }
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 32px;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-          Arial;
-      }
 
-      .content {
-        max-width: 720px;
-        text-align: center;
-        line-height: 1.5;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+  <style>
+    /* Center page and set a minimal typographic scale */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: #fff;
+      color: #000;
+    }
 
-      /* Large, bold name */
-      .content h1 {
-        font-size: 2rem;
-        margin: 0 0 0.35em;
-        font-weight: 900;
-      }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial;
+    }
 
-      /* The first paragraph after the name is the small intro line;
+    .content {
+      max-width: 720px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Large, bold name */
+    .content h1 {
+      font-size: 2rem;
+      margin: 0 0 0.35em;
+      font-weight: 900;
+    }
+
+    /* The first paragraph after the name is the small intro line;
          make it medium weight so it's less bold than the name but still visible */
-      .content h1 + p {
-        margin-top: 0;
-        margin-bottom: 0.6em;
-        font-weight: 500;
-        color: #111;
-      }
+    .content h1+p {
+      margin-top: 0;
+      margin-bottom: 0.6em;
+      font-weight: 500;
+      color: #111;
+    }
 
-      /* Employer line (the paragraph after the intro) — lighter weight */
-      .content h1 + p + p {
-        margin-top: 0.6em;
-        margin-bottom: 0.8em;
-        font-weight: 600;
-        color: #222;
-      }
+    /* Employer line (the paragraph after the intro) — lighter weight */
+    .content h1+p+p {
+      margin-top: 0.6em;
+      margin-bottom: 0.8em;
+      font-weight: 600;
+      color: #222;
+    }
 
-      /* Projects heading slightly less bold than h1 */
-      .content h2 {
-        font-size: 1.1rem;
-        margin-top: 1.1em;
-        margin-bottom: 0.4em;
-        font-weight: 700;
-      }
+    /* Projects heading slightly less bold than h1 */
+    .content h2 {
+      font-size: 1.1rem;
+      margin-top: 1.1em;
+      margin-bottom: 0.4em;
+      font-weight: 700;
+    }
 
-      /* Project list: keep titles bold but overall less heavy */
-      .content ul {
-        list-style: none;
-        padding-left: 0;
-        margin: 0.6em 0 0.8em;
-      }
+    /* Project list: keep titles bold but overall less heavy */
+    .content ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.6em 0 0.8em;
+    }
 
-      .content li {
-        margin: 0.6em 0;
-        font-weight: 400;
-        color: #111;
-      }
+    .content li {
+      margin: 0.6em 0;
+      font-weight: 400;
+      color: #111;
+    }
 
-      .content li strong {
-        font-weight: 700; /* project title emphasis */
-      }
+    .content li strong {
+      font-weight: 700;
+      /* project title emphasis */
+    }
 
-      /* Links: use browser default color but underline for clarity */
-      a {
-        color: inherit;
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 3px;
-      }
+    /* Links: use browser default color but underline for clarity */
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
 
-      hr {
-        border: none;
-        height: 1px;
-        background: rgba(0,0,0,0.06);
-        margin: 1.25em 0;
-      }
+    hr {
+      border: none;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.06);
+      margin: 1.25em 0;
+    }
 
-      /* small footer spacing */
-      .content p:last-of-type {
-        margin-top: 1em;
-      }
-    </style>
-    {% if site.favicon %}
-    <link rel="shortcut icon" href="{{ site.favicon | relative_url }}" />
-    {% endif %}
-  </head>
-  <body>
-    <main class="content">
-      {{ content }}
-    </main>
-  </body>
+    /* small footer spacing */
+    .content p:last-of-type {
+      margin-top: 1em;
+    }
+  </style>
+  {% if site.favicon %}
+  <link rel="shortcut icon" href="{{ site.favicon | relative_url }}" />
+  {% endif %}
+</head>
+
+<body>
+  <main class="content">
+    {{ content }}
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    // Initialize mermaid; startOnLoad will scan the page for .mermaid containers
+    mermaid.initialize({startOnLoad: true, theme: "neutral"});
+  </script>
+  <script>
+    (function () {
+      // ASCII box content
+      const lines = [
+        "Somewhat of a hacker, are we?",
+        "",
+        "If you see this, reach out via email — let's chat :)",
+        "I'm sure you and I can nerd out over basic tech :)"
+      ];
+
+      // compute max line length
+      const maxLen = lines.reduce((m, l) => Math.max(m, l.length), 0);
+
+      // build top/bottom border and padded content (centered)
+      const border = "+" + "-".repeat(maxLen + 2) + "+";
+      let box = border + "\n";
+      lines.forEach((l) => {
+        const totalPadding = maxLen - l.length;
+        const leftPadding = Math.floor(totalPadding / 2);
+        const rightPadding = totalPadding - leftPadding;
+        box += "| " + " ".repeat(leftPadding) + l + " ".repeat(rightPadding) + " |\n";
+      });
+      box += border;
+      console.log(box);
+    })();
+  </script>
+</body>
+
 </html>

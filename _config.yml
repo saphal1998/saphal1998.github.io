@@ -1,2 +1,6 @@
 title: Saphal Patro
 author: Saphal Patro
+collections:
+  blog:
+    output: true
+    permalink: /blog/:path/
