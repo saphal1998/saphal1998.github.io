@@ -18,7 +18,6 @@ Software Engineer at [Bloomberg](https://www.bloomberg.com)
 ## Projects
 
 - [Hermes Profile Transformer](https://www.npmjs.com/package/hermes-profile-transformer) — Visualize Hermes JS runtime profile traces. (Typescript)
-- [Stack Attack](https://github.com/taneliang/stack-attack) — CLI for stacked pull requests. (React, Nodegit)
 
 ---
 
