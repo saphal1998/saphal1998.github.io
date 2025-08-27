@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+  <style>
+    /* Blog layout: readable width, left-aligned content with a simple header */
+    html,
+    body {
+      margin: 0;
+      background: #fff;
+      color: #000;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 18px 24px;
+    }
+
+    header .nav {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .nav a {
+      text-decoration: underline;
+      color: inherit;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 28px auto;
+      padding: 0 24px;
+      line-height: 1.6;
+    }
+
+    article h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .post-meta {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 1.1rem;
+    }
+
+    /* Basic mermaid container styling, if used */
+    .mermaid {
+      margin: 18px 0;
+    }
+
+    a {
+      color: inherit;
+    }
+  </style>
+  {% if site.favicon %}
+  <link rel="shortcut icon" href="{{ site.favicon | relative_url }}" />
+  {% endif %}
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="https://github.com/saphal1998">GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <!-- Defer-mermaid: load the mermaid script with `defer` so it doesn't block parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+
+  <script>
+    // Safe init for Mermaid after the script has loaded.
+    (function () {
+      // Convert fenced code blocks with language-mermaid to div.mermaid
+      function convertFencedBlocks() {
+        document.querySelectorAll("pre > code.language-mermaid, pre > code.mermaid").forEach(function (code) {
+          var parent = code.parentElement;
+          var div = document.createElement("div");
+          div.className = "mermaid";
+          div.textContent = code.textContent;
+          parent.parentElement.replaceChild(div, parent);
+        });
+      }
+
+      // Initialize mermaid when available. Use load event + a small poll fallback.
+      function initMermaidWhenReady() {
+        function tryInit() {
+          if (window.mermaid && typeof window.mermaid.initialize === "function") {
+            // convert fenced code blocks before initializing
+            convertFencedBlocks();
+            try {
+              window.mermaid.initialize({startOnLoad: false, theme: "neutral"});
+              // render any .mermaid blocks found
+              window.mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+            } catch (e) {
+              // If initialization throws, log but don't break the page.
+              console.warn("Mermaid initialization failed:", e);
+            }
+            return true;
+          }
+          return false;
+        }
+
+        // Try right away (in case script executed quickly)
+        if (tryInit()) return;
+
+        // Try again on window load (mermaid deferred will execute before load)
+        window.addEventListener("load", function () {
+          if (tryInit()) return;
+          // Poll as a final fallback for a short period
+          var attempts = 0;
+          var id = setInterval(function () {
+            attempts += 1;
+            if (tryInit() || attempts > 10) {
+              clearInterval(id);
+            }
+          }, 150);
+        }, {once: true});
+      }
+
+      // Kick it off
+      initMermaidWhenReady();
+    })();
+  </script>
+</body>
+
+</html>

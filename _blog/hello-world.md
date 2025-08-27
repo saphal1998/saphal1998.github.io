@@ -1,6 +1,6 @@
 ---
 title: Hello world!
-layout: default
+layout: blog 
 date: 2025-08-23
 ---
 
