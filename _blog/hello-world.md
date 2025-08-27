@@ -1,5 +1,6 @@
 ---
 title: Hello world!
+description: "Hello world for the blog"
 layout: blog 
 date: 2025-08-23
 ---
